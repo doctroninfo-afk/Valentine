@@ -16,7 +16,6 @@ body {
   color: white;
 }
 
-/* ---------- GALLERY ---------- */
 .gallery {
   display: flex;
   justify-content: center;
@@ -69,7 +68,6 @@ body {
   border-radius: 20px;
 }
 
-/* ---------- BUTTONS ---------- */
 .buttons { margin: 25px; }
 
 button {
@@ -91,7 +89,6 @@ button {
   margin-left: 10px;
 }
 
-/* ---------- LOVE CARDS ---------- */
 .love-card {
   background: rgba(255,255,255,0.25);
   backdrop-filter: blur(10px);
@@ -107,7 +104,6 @@ button {
   margin-bottom: 10px;
 }
 
-/* ---------- NEPAL BUTTONS ---------- */
 .place-btn {
   width: 100%;
   margin: 10px 0;
@@ -130,13 +126,11 @@ button {
   cursor: default;
 }
 
-/* ---------- LOCK ---------- */
 .locked {
   opacity: 0.4;
   pointer-events: none;
 }
 
-/* ---------- TRAVEL METER ---------- */
 .meter {
   margin-top: 20px;
 }
@@ -156,7 +150,6 @@ button {
   margin-top: 8px;
 }
 
-/* ---------- SURPRISE ---------- */
 #surprise {
   position: fixed;
   inset: 0;
@@ -169,7 +162,6 @@ button {
 }
 #surprise img { width: 250px; }
 
-/* ---------- LILY DOODLES BACKGROUND ---------- */
 #lily-bg {
   position: fixed;
   inset: 0;
@@ -179,9 +171,9 @@ button {
 
 .lily {
   position: absolute;
-  font-size: 28px;
-  opacity: 0.18;
-  animation: float 12s infinite ease-in-out;
+  font-size: 70px;           
+  opacity: 0.35;             
+  animation: float 10s infinite ease-in-out;
   pointer-events: none;
 }
 
@@ -190,12 +182,13 @@ button {
     transform: translateY(0) rotate(0deg);
   }
   50% {
-    transform: translateY(-30px) rotate(10deg);
+    transform: translateY(-50px) rotate(12deg);
   }
   100% {
     transform: translateY(0) rotate(0deg);
   }
 }
+
 
 </style>
 </head>
@@ -206,7 +199,6 @@ button {
 
 <h1>Will You Be My Valentine? 💘</h1>
 
-<!-- GALLERY -->
 <div class="gallery" id="gallery">
   <div class="flip-card">
     <div class="flip-inner" id="flipInner">
@@ -227,19 +219,16 @@ button {
   <img src="images/pic5.jpeg">
 </div>
 
-<!-- YES / NO -->
 <div class="buttons">
   <button id="yesBtn">OMG YESSS 💖</button>
   <button id="noBtn">No 😢</button>
 </div>
 
-<!-- TIME SINCE -->
 <div class="love-card">
   <div class="love-title">⏳ Time Since We Dated</div>
   <div id="timerText">Loading… 💕</div>
 </div>
 
-<!-- NEPAL ADVENTURES -->
 <div class="love-card locked" id="nepalSection">
   <div class="love-title">🇳🇵 Nepal Adventures</div>
 
@@ -256,14 +245,12 @@ button {
   </div>
 </div>
 
-<!-- SURPRISE -->
 <div id="surprise">
   <h1>HAPPY HAPPY HAPPY 💖</h1>
   <img src="images/kitten.gif">
 </div>
 
 <script>
-/* IMAGE SHUFFLE */
 const gallery = document.getElementById("gallery");
 setInterval(() => {
   for (let i = gallery.children.length; i >= 0; i--) {
@@ -271,7 +258,6 @@ setInterval(() => {
   }
 }, 3000);
 
-/* TIME SINCE WE DATED */
 const startDate = new Date("2025-10-19T15:15:00");
 setInterval(() => {
   const now = new Date();
@@ -284,7 +270,6 @@ setInterval(() => {
     `${d} days ${h}h ${m}m ${s}s of us 💕`;
 }, 1000);
 
-/* YES BUTTON */
 let scale = 1;
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
@@ -310,7 +295,6 @@ function triggerYes() {
   }, 2500);
 }
 
-/* NEPAL BUTTON LOGIC */
 const placeBtns = document.querySelectorAll(".place-btn");
 const meterFill = document.getElementById("meterFill");
 const meterText = document.getElementById("meterText");
@@ -332,23 +316,24 @@ placeBtns.forEach(btn => {
   });
 });
 
-/* MOBILE FLIP */
 document.getElementById("flipInner").addEventListener("click", e => {
   e.currentTarget.classList.toggle("flipped");
 });
 
 const lilyContainer = document.getElementById("lily-bg");
-const lilyCount = 18;
+const lilyCount = 40; // MORE FLOWERS 🌸🌸🌸
 
 for (let i = 0; i < lilyCount; i++) {
   const lily = document.createElement("div");
   lily.className = "lily";
-  lily.textContent = "🌸"; // lily-style flower
+
+  const flowers = ["🌸", "🌺", "🌼"];
+  lily.textContent = flowers[Math.floor(Math.random() * flowers.length)];
 
   lily.style.left = Math.random() * 100 + "vw";
   lily.style.top = Math.random() * 100 + "vh";
-  lily.style.animationDuration = (8 + Math.random() * 8) + "s";
-  lily.style.fontSize = (20 + Math.random() * 25) + "px";
+  lily.style.fontSize = (60 + Math.random() * 50) + "px"; 
+  lily.style.animationDuration = (6 + Math.random() * 6) + "s";
 
   lilyContainer.appendChild(lily);
 }
