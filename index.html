@@ -162,6 +162,24 @@ button {
 }
 #surprise img { width: 250px; }
 
+#secretLetter {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+  font-size: 1.2rem;
+  z-index: 1001; 
+  border-radius: 20px;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
 #lily-bg {
   position: fixed;
   inset: 0;
@@ -188,8 +206,6 @@ button {
     transform: translateY(0) rotate(0deg);
   }
 }
-
-
 </style>
 </head>
 
@@ -254,6 +270,16 @@ button {
   <img src="images/kitten.gif">
 </div>
 
+<div id="secretLetter">
+    <p>
+        To the love of my life, <br><br>
+        Today’s Valentine's Day. I don't have much to say. Since the day we started talking there hasn’t been a second where the thought of you hasn't crossed my mind. It's only been 118 days since we started dating but I feel like I’ve known you for an eternity. <br><br>
+        In just 118 days, you’ve given me memories that I don’t want to ever come to an end. Every conversation, laugh, silence, and little moments we’ve spent together makes me feel happy and special. The sound of your laugh fills my heart with joy. I wish you could see yourself the way I see you, my love. <br><br>
+        Always and only yours, <br>
+        Gadhaaaaaaaaa
+    </p>
+</div>
+
 <script>
 const gallery = document.getElementById("gallery");
 setInterval(() => {
@@ -289,14 +315,30 @@ noBtn.addEventListener("click", growYes);
 yesBtn.addEventListener("click", triggerYes);
 
 function triggerYes() {
-  document.getElementById("surprise").style.display = "flex";
+  const surprise = document.getElementById("surprise");
+  const secretLetter = document.getElementById("secretLetter");
+
+  surprise.style.display = "flex";
   document.getElementById("nepalSection").classList.remove("locked");
 
   setTimeout(() => {
-    document.getElementById("surprise").style.display = "none";
+    surprise.style.display = "none";
     scale = 1;
     yesBtn.style.transform = "scale(1)";
-  }, 2500);
+
+    setTimeout(() => {
+      secretLetter.style.display = "flex";
+      secretLetter.style.opacity = 1;
+
+      setTimeout(() => {
+        secretLetter.style.opacity = 0;
+        setTimeout(() => {
+          secretLetter.style.display = "none";
+        }, 1000); 
+      }, 30000);
+
+    }, 1000); 
+  }, 2500); 
 }
 
 const placeBtns = document.querySelectorAll(".place-btn");
@@ -344,16 +386,16 @@ for (let i = 0; i < lilyCount; i++) {
 
 const bgMusic = document.getElementById("bgMusic");
 
-  window.addEventListener("load", () => {
-      bgMusic.play().catch(() => {
-          console.log("Autoplay blocked. Waiting for user interaction...");
-      });
-  });
-  document.body.addEventListener("click", () => {
-      if (bgMusic.paused) {
-          bgMusic.play();
-      }
-  }, { once: true });
+window.addEventListener("load", () => {
+    bgMusic.play().catch(() => {
+        console.log("Autoplay blocked. Waiting for user interaction...");
+    });
+});
+document.body.addEventListener("click", () => {
+    if (bgMusic.paused) {
+        bgMusic.play();
+    }
+}, { once: true });
 
 </script>
 
