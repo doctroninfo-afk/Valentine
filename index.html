@@ -195,6 +195,10 @@ button {
 
 <body>
 
+<audio id="bgMusic" loop>
+    <source src="audio/music.mp3" type="audio/mpeg">
+</audio>
+
 <div id="lily-bg"></div>
 
 <h1>Will You Be My Valentine? 💘</h1>
@@ -337,6 +341,19 @@ for (let i = 0; i < lilyCount; i++) {
 
   lilyContainer.appendChild(lily);
 }
+
+const bgMusic = document.getElementById("bgMusic");
+
+  window.addEventListener("load", () => {
+      bgMusic.play().catch(() => {
+          console.log("Autoplay blocked. Waiting for user interaction...");
+      });
+  });
+  document.body.addEventListener("click", () => {
+      if (bgMusic.paused) {
+          bgMusic.play();
+      }
+  }, { once: true });
 
 </script>
 
