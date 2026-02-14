@@ -3,308 +3,309 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Story ❤️</title>
+<title>Be My Valentine 💕</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
+* { box-sizing: border-box; }
 
 body {
-    margin: 0;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    color: #fff;
+  margin: 0;
+  font-family: "Comic Sans MS", cursive;
+  background: linear-gradient(135deg, #ffc1cc, #ffb6c1);
+  text-align: center;
+  color: white;
 }
 
-.container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 30px 20px;
-    text-align: center;
-}
-
-h1 { font-size: 2.6rem; }
-h2 { font-weight: 400; margin-bottom: 30px; }
-
+/* ---------- GALLERY ---------- */
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
-    margin-bottom: 40px;
-}
-.gallery img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 18px;
-    transition: 0.4s;
-}
-.gallery img:hover {
-    transform: scale(1.1) rotate(2deg);
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 25px;
 }
 
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 60px;
+.flip-card {
+  width: 180px;
+  height: 180px;
+  perspective: 1000px;
 }
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-inner,
+.flip-inner.flipped {
+  transform: rotateY(180deg);
+}
+.flip-front, .flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.flip-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.flip-back {
+  background: #ff7aa2;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gallery img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* ---------- BUTTONS ---------- */
+.buttons { margin: 25px; }
+
 button {
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.4s;
+  padding: 15px 28px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
 }
+
 #yesBtn {
-    background: #ff0055;
-    color: white;
+  background: #ff4d6d;
+  color: white;
+  transition: transform 0.3s;
 }
 #noBtn {
-    background: white;
-    color: #ff0055;
+  background: #ffd1dc;
+  color: #444;
+  margin-left: 10px;
 }
 
-.fullscreen {
-    position: fixed;
-    inset: 0;
-    font-size: 4rem !important;
-    border-radius: 0;
-    z-index: 1000;
+/* ---------- LOVE CARDS ---------- */
+.love-card {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  padding: 25px;
+  margin: 25px auto;
+  width: 90%;
+  max-width: 650px;
 }
 
-.card {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(10px);
-    border-radius: 30px;
-    padding: 30px;
-    margin-bottom: 40px;
+.love-title {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
 }
 
+/* ---------- NEPAL BUTTONS ---------- */
+.place-btn {
+  width: 100%;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 20px;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.3);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.place-btn:hover {
+  background: rgba(255,255,255,0.45);
+}
+
+.place-btn.completed {
+  background: white;
+  color: #ff4d6d;
+  cursor: default;
+}
+
+/* ---------- LOCK ---------- */
 .locked {
-    opacity: 0.5;
-    pointer-events: none;
+  opacity: 0.4;
+  pointer-events: none;
 }
 
-.checklist {
-    display: grid;
-    gap: 15px;
-    max-width: 600px;
-    margin: auto;
-}
-.place {
-    background: rgba(255,255,255,0.25);
-    border-radius: 20px;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.place:hover { transform: scale(1.03); }
-
-.place.checked span {
-    text-decoration: line-through;
-    opacity: 0.7;
-}
-
-.heart {
-    width: 26px;
-    height: 26px;
-    background: #fff;
-    transform: rotate(-45deg);
-    position: relative;
-}
-.heart::before,
-.heart::after {
-    content: "";
-    width: 26px;
-    height: 26px;
-    background: #fff;
-    border-radius: 50%;
-    position: absolute;
-}
-.heart::before { top: -13px; left: 0; }
-.heart::after { left: 13px; top: 0; }
-
-.place.checked .heart,
-.place.checked .heart::before,
-.place.checked .heart::after {
-    background: #ff0055;
-}
-
+/* ---------- TRAVEL METER ---------- */
 .meter {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 .meter-bar {
-    height: 14px;
-    background: rgba(255,255,255,0.4);
-    border-radius: 20px;
-    overflow: hidden;
+  height: 10px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 20px;
+  overflow: hidden;
 }
 .meter-fill {
-    height: 100%;
-    width: 0%;
-    background: #ff0055;
-    transition: 0.5s;
+  height: 100%;
+  width: 0%;
+  background: white;
+  transition: width 0.4s;
+}
+.meter-text {
+  margin-top: 8px;
 }
 
-.timer {
-    font-size: 1.3rem;
+/* ---------- SURPRISE ---------- */
+#surprise {
+  position: fixed;
+  inset: 0;
+  background: #ff9eb5;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 999;
 }
-
-#kitten {
-    display: none;
-    margin-top: 30px;
-}
-#kitten img {
-    width: 200px;
-    border-radius: 20px;
-}
-.hidden {
-    display: none !important;
-}
-
+#surprise img { width: 250px; }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<h1>Will You Be My Valentine? 💘</h1>
 
-<h1>💖 Will You Be My Valentine? 💖</h1>
-<h2>And my forever travel partner ✨</h2>
-
+<!-- GALLERY -->
 <div class="gallery" id="gallery">
-    <img src="images/pic1.jpeg">
-    <img src="images/pic2.jpeg">
-    <img src="images/pic3.jpeg">
-    <img src="images/pic4.jpeg">
-    <img src="images/pic5.jpeg">
-</div>
-
-<div class="buttons">
-    <button id="yesBtn">OMG YESSS 😍</button>
-    <button id="noBtn">OMG NO 🙄</button>
-</div>
-
-<div class="card">
-<h3>⏳ Time Since We Met</h3>
-<div class="timer" id="timer"></div>
-</div>
-
-<div class="card locked" id="nepalSection">
-<h3>🇳🇵 Nepal Adventures (Unlocked after YES)</h3>
-
-<div class="checklist" id="places">
-    <div class="place"><span>🌄 Pokhara</span><div class="heart"></div></div>
-    <div class="place"><span>🏔️ Manaslu Circuit</span><div class="heart"></div></div>
-    <div class="place"><span>🥾 Annapurna Base Camp</span><div class="heart"></div></div>
-    <div class="place"><span>🏞️ Rara Lake</span><div class="heart"></div></div>
-</div>
-
-<div class="meter">
-    <p id="meterText">Travel Meter: 0%</p>
-    <div class="meter-bar">
-        <div class="meter-fill" id="meterFill"></div>
+  <div class="flip-card">
+    <div class="flip-inner" id="flipInner">
+      <div class="flip-front">
+        <img src="images/pic1.jpeg">
+      </div>
+      <div class="flip-back">
+        <h3>Our First Date 💖</h3>
+        <p>YAYYYY 🥰</p>
+        <p>19 October</p>
+      </div>
     </div>
-</div>
+  </div>
+
+  <img src="images/pic2.jpeg">
+  <img src="images/pic3.jpeg">
+  <img src="images/pic4.jpeg">
+  <img src="images/pic5.jpeg">
 </div>
 
-<div id="kitten">
-    <h2>HAPPY HAPPY HAPPY 😸💃</h2>
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+<!-- YES / NO -->
+<div class="buttons">
+  <button id="yesBtn">OMG YESSS 💖</button>
+  <button id="noBtn">No 😢</button>
 </div>
 
+<!-- TIME SINCE -->
+<div class="love-card">
+  <div class="love-title">⏳ Time Since We Dated</div>
+  <div id="timerText">Loading… 💕</div>
+</div>
+
+<!-- NEPAL ADVENTURES -->
+<div class="love-card locked" id="nepalSection">
+  <div class="love-title">🇳🇵 Nepal Adventures</div>
+
+  <button class="place-btn">🏞️ Pokhara</button>
+  <button class="place-btn">🏔️ Manaslu Circuit</button>
+  <button class="place-btn">🥾 Annapurna Base Camp</button>
+  <button class="place-btn">🌊 Rara Lake</button>
+
+  <div class="meter">
+    <div class="meter-bar">
+      <div class="meter-fill" id="meterFill"></div>
+    </div>
+    <div class="meter-text" id="meterText">Travel Meter: 0%</div>
+  </div>
+</div>
+
+<!-- SURPRISE -->
+<div id="surprise">
+  <h1>HAPPY HAPPY HAPPY 💖</h1>
+  <img src="images/kitten.gif">
 </div>
 
 <script>
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const nepalSection = document.getElementById("nepalSection");
-const kitten = document.getElementById("kitten");
-
-let scale = 1;
-let unlocked = false;
-
-function showSurprise() {
-    if (unlocked) return;
-
-    unlocked = true;
-
-    yesBtn.classList.add("fullscreen");
-    yesBtn.innerText = "YES 💍❤️";
-
-    kitten.style.display = "block";
-
-    nepalSection.classList.remove("locked");
-
-    setTimeout(() => {
-        yesBtn.classList.remove("fullscreen");
-        yesBtn.style.transform = "scale(1)";
-        yesBtn.innerText = "OMG YESSS 😍";
-
-        kitten.style.display = "none";
-    }, 2500);
-}
-
-function growYes() {
-    scale += 0.3;
-    yesBtn.style.transform = `scale(${scale})`;
-
-    if (scale >= 4) {
-        showSurprise();
-    }
-}
-
-noBtn.addEventListener("mouseover", growYes);
-noBtn.addEventListener("click", growYes);
-yesBtn.addEventListener("click", showSurprise);
-
+/* IMAGE SHUFFLE */
+const gallery = document.getElementById("gallery");
 setInterval(() => {
-    const g = document.getElementById("gallery");
-    [...g.children]
-        .sort(() => Math.random() - 0.5)
-        .forEach(img => g.appendChild(img));
+  for (let i = gallery.children.length; i >= 0; i--) {
+    gallery.appendChild(gallery.children[Math.random() * i | 0]);
+  }
 }, 3000);
 
-const places = document.querySelectorAll(".place");
+/* TIME SINCE WE DATED */
+const startDate = new Date("2025-10-19T15:15:00");
+setInterval(() => {
+  const now = new Date();
+  const diff = now - startDate;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor(diff / 3600000) % 24;
+  const m = Math.floor(diff / 60000) % 60;
+  const s = Math.floor(diff / 1000) % 60;
+  document.getElementById("timerText").innerText =
+    `${d} days ${h}h ${m}m ${s}s of us 💕`;
+}, 1000);
+
+/* YES BUTTON */
+let scale = 1;
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+function growYes() {
+  scale += 0.3;
+  yesBtn.style.transform = `scale(${scale})`;
+  if (scale > 4) triggerYes();
+}
+
+noBtn.addEventListener("mouseenter", growYes);
+noBtn.addEventListener("click", growYes);
+yesBtn.addEventListener("click", triggerYes);
+
+function triggerYes() {
+  document.getElementById("surprise").style.display = "flex";
+  document.getElementById("nepalSection").classList.remove("locked");
+
+  setTimeout(() => {
+    document.getElementById("surprise").style.display = "none";
+    scale = 1;
+    yesBtn.style.transform = "scale(1)";
+  }, 2500);
+}
+
+/* NEPAL BUTTON LOGIC */
+const placeBtns = document.querySelectorAll(".place-btn");
 const meterFill = document.getElementById("meterFill");
 const meterText = document.getElementById("meterText");
 
-function updateMeter() {
-    const done = document.querySelectorAll(".place.checked").length;
-    const total = places.length;
-    const percent = Math.round((done / total) * 100);
+let completed = 0;
+const total = placeBtns.length;
 
+placeBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (btn.classList.contains("completed")) return;
+
+    btn.classList.add("completed");
+    btn.textContent += " ✅";
+    completed++;
+
+    const percent = Math.round((completed / total) * 100);
     meterFill.style.width = percent + "%";
-    meterText.innerText = `Travel Meter: ${percent}% ❤️`;
-}
-
-places.forEach(place => {
-    place.addEventListener("click", () => {
-        if (!unlocked) return;
-        place.classList.toggle("checked");
-        updateMeter();
-    });
+    meterText.textContent = `Travel Meter: ${percent}%`;
+  });
 });
 
-const startDate = new Date("2025-10-19T15:15:00");
-
-setInterval(() => {
-    const diff = Date.now() - startDate;
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
-    const mins = Math.floor(diff / (1000 * 60)) % 60;
-    const secs = Math.floor(diff / 1000) % 60;
-
-    document.getElementById("timer").innerText =
-        `${days} days ${hours}h ${mins}m ${secs}s of us 💕`;
-}, 1000);
+/* MOBILE FLIP */
+document.getElementById("flipInner").addEventListener("click", e => {
+  e.currentTarget.classList.toggle("flipped");
+});
 </script>
-
 
 </body>
 </html>
